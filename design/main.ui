@@ -29,44 +29,20 @@
     </layout>
    </item>
    <item>
+    <widget class="QLabel" name="info_label">
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QListWidget" name="lst_results"/>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="nex_prev_ep_layout">
-     <item>
-      <widget class="QPushButton" name="btn_prev">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Previous Episode</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="spacer_prev_next">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_next">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Next Episode</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QHBoxLayout" name="nex_prev_ep_layout"/>
    </item>
    <item>
     <widget class="Line" name="line_watch">
@@ -76,12 +52,12 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="btn_watch">
+    <widget class="QPushButton" name="btn_select">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="text">
-      <string>Watch</string>
+      <string>Select</string>
      </property>
     </widget>
    </item>
@@ -91,9 +67,7 @@
   <tabstop>lne_search</tabstop>
   <tabstop>btn_search</tabstop>
   <tabstop>lst_results</tabstop>
-  <tabstop>btn_watch</tabstop>
-  <tabstop>btn_prev</tabstop>
-  <tabstop>btn_next</tabstop>
+  <tabstop>btn_select</tabstop>
  </tabstops>
  <resources/>
  <connections/>

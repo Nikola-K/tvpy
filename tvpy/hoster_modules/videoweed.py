@@ -14,13 +14,45 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys
+
+import re
+import urllib2
+
+import requests
 
 
-def main(argv):
-    if argv is None:
-        argv = sys.argv
+API_URL = "http://www.videoweed.es/api/player.api.php?cid2=undefined&key={key}&numOfErrors=0&cid3=watchseries%2Elt&user=undefined&cid=1&file={file_id}&pass=undefined"
+
+
+class Videoweed(object):
+    def __init__(self, file_url):
+        self.url = file_url
+        self.cookies = None
+        self.headers = {
+        'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36"}
+
+    def __parse_api(self, file_id, file_key):
+        url = API_URL.format(key=urllib2.quote(file_key), file_id=file_id)
+
+        r = requests.get(url, cookies=self.cookies, headers=self.headers)
+
+        if r.status_code == 200:
+            resp = r.text
+            resp = resp.replace("url=", '')
+            return resp.split("&title")[0]
+        else:
+            return None
+
+    def get_direct_link(self):
+        r = requests.get(self.url)
+        self.cookies = r.cookies
+        page = r.text
+        file_id = re.findall(r'file="(.+?)\"', page)[0]
+        file_key = re.findall(r'filekey="(.+?)\"', page)[0]
+
+        return self.__parse_api(file_id, file_key)
 
 
 if __name__ == "__main__":
-    main()
+    v = Videoweed("http://www.videoweed.es/file/96b9fa261962d")
+    v.get_direct_link()
